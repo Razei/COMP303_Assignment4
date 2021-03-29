@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <th:block th:replace="partial/imports.html :: headerFragment"/>
+</head>
+
+<body>
+<div class="absolute-centered">
+    <div class="row no-gutters p-5 shadowed">
+        <div class="col-12 mb-4">
+            <h1>COVID-19 Testing App</h1>
+        </div>
+
+        <a href="/patients" class="col-12 mb-3 custom-card custom-card-gradient-1 shadowed card-gradient-1">
+            <div class="p-4">
+                <i style="color: var(--colour-1)" class="bi bi-people-fill"></i>
+                <span class="ml-4">Patients</span>
+            </div>
+        </a>
+
+        <a href="/centres" class="mb-3 col-12 custom-card custom-card-gradient-2 shadowed">
+            <div class="p-4">
+                <i style="color: var(--colour-1)"  class="bi bi-journal-bookmark-fill"></i>
+                <span class="ml-4">Centres</span>
+            </div>
+        </a>
+
+        <a href="/tests" class="col-12 custom-card custom-card-gradient-3 shadowed">
+            <div class="p-4">
+                <i style="color: var(--colour-1)" class="bi bi-clipboard-data"></i>
+                <span class="ml-4">Tests</span>
+            </div>
+        </a>
+    </div>
+</div>
+</body>
+</html>
