@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>New Patient</title>
+        <th:block th:replace="partial/imports.html :: headerFragment"/>
+    </head>
+
+    <body th:with="update=${patient != null}">
+        <div class="container absolute-centered p-5">
+        <form method="GET" action="/patients" class="mb-2">
+            <button class="btn btn-primary">
+                <i style="color: white; font-size: 1.5rem; vertical-align: center" class="mr-2 bi bi-arrow-left-square-fill"></i>Back
+            </button>
+        </form>
+
+        <h1 class="mb-4">New Patient</h1>
+        <hr/>
+
+        <form method="post" th:action="${update} ? ('/editPatient/'+ ${patient.getId()}) : '/patient/new'" class="row no-gutters">
+            <div class="col-12 mb-5">
+                <div class="row no-gutters mb-4">
+                    <input title="OHIP_Id" type="text" name="OHIP_Id" placeholder="OHIP ID" class="form-control" th:value="${patient?.getOHIP_Id()}" required/>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <input title="First Name" type="text" name="firstName" placeholder="First Name" class="form-control" th:value="${patient?.getFirstName()}" required/>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <input title="Last Name" type="text" name="lastName" placeholder="Last Name" class="form-control" th:value="${patient?.getLastName()}" required/>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <input title="Age" type="number" name="age" placeholder="Age" class="form-control" th:value="${patient?.getAge()}" required/>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <input title="Date Of Birth" type="date" name="DOB" placeholder="Date Of Birth" class="form-control" th:value="${patient?.getDOB()}" required/>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <input title="Address" type="text" name="address" placeholder="Address" class="form-control" th:value="${patient?.getAddress()}" required/>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <input title="City" type="text" name="city" placeholder="City" class="form-control" th:value="${patient?.getCity()}" required/>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <input title="Phone Number" type="tel" name="phone" placeholder="Phone Number" class="form-control" th:value="${patient?.getPhone()}" required/>
+                </div>
+
+                <div class="col-12 p-0 mb-2">
+                    <div class="row no-gutters">
+                        <div class="col-auto d-flex align-items-center">
+                            <input type="radio" name="gender" id="gender-m" value="Male" required/>
+                            <label class="ml-2" for="gender-m">Male</label>
+                        </div>
+
+                        <div class="col-auto ml-3 d-flex align-items-center">
+                            <input type="radio" name="gender" id="gender-f" value="Female" required/>
+                            <label class="ml-2" for="gender-f">Female</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row no-gutters mb-4">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+    </body>
+</html>

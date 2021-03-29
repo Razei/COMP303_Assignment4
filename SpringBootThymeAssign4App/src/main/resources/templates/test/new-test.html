@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>New Test</title>
+        <th:block th:replace="partial/imports.html :: headerFragment"/>
+    </head>
+
+    <body th:with="update=${test != null}">
+        <div class="container absolute-centered p-5">
+            <form method="GET" action="/tests" class="mb-2">
+                <button class="btn btn-primary">
+                    <i style="color: white; font-size: 1.5rem; vertical-align: center" class="mr-2 bi bi-arrow-left-square-fill"></i>Back
+                </button>
+            </form>
+
+            <h1 class="mb-4">New Test</h1>
+            <hr/>
+    
+            <form method="post" th:action="${update} ? ('/editTest/'+ ${test.getId()}) : '/test/new'" class="row no-gutters">
+                <div class="col-12 mb-5">
+                    <div class="row no-gutters mb-4">
+                        <input title="Test Date" type="date" name="testDate" placeholder="Test Date" class="form-control" th:value="${test?.getTestDate()}" required/>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input title="Symptoms" type="text" name="symptoms" placeholder="Symptoms" class="form-control" th:value="${test?.getSymptoms()}" required/>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input title="Status" type="text" name="status" placeholder="Status" class="form-control" th:value="${test?.getStatus()}" required/>
+                    </div>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

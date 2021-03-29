@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <th:block th:replace="partial/imports.html :: headerFragment"/>
+    </head>
+
+    <body>
+        <div class="p-5">
+            <form method="GET" action="/" class="mb-2">
+                <button class="btn btn-primary">
+                    <i style="color: white; font-size: 1.5rem; vertical-align: center" class="mr-2 bi bi-arrow-left-square-fill"></i>Back
+                </button>
+            </form>
+
+            <div class="table-responsive shadowed rounded-custom">
+                <div class="tableTitle gradient-3 d-flex justify-content-between align-items-center">
+                    <span></span>
+                    <span th:text="${tableModel.getTitle()}">Table Title</span>
+                    <a href="/test/new" style="color: white" class="d-flex"><i class="bi bi-plus-circle mr-2"></i> Add New</a>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th th:each="header : ${tableModel.getHeaders()}" th:text="${header}"></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody th:if="${tableModel.getData() != null and tableModel.getData().size() > 0}">
+                        <tr th:each="test : ${tableModel.getData()}">
+                            <td th:text="${test?.getTestDate()}"></td>
+                            <td th:text="${test?.getSymptoms()}"></td>
+                            <td th:text="${test?.getStatus()}"></td>
+                            <td style="text-align: right;">
+                                <form class="d-inline mr-2" th:action="@{'/editTest/' + ${test?.getId()}}">
+                                    <button class="btn btn-success">
+                                        <i style="color: white; font-size: 1rem" class="bi bi-pencil-square"></i>
+                                    </button>
+                                </form>
+
+                                <form class="d-inline" method="POST" th:action="@{'/deleteTest/' + ${test?.getId()}}">
+                                    <button class="btn btn-danger">
+                                        <i style="color: white; font-size: 1rem" class="bi bi-trash-fill"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tbody th:if="${tableModel.getData() != null and tableModel.getData().size() <= 0}">
+                        <tr>
+                            <td class="text-center" th:colspan="${tableModel.getHeaders().length}">None</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
