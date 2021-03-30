@@ -22,7 +22,7 @@ public class Patient {
 	@Column(name="gender")
 	private String gender;
 
-	@Column(name="ohip_ID")
+	@Column(name="ohip_id")
 	private int ohip_ID;
 
 	@Column(name="address")
