@@ -18,10 +18,11 @@ import java.util.List;
 public class PatientController {
     private final ObjectMapper mapper = new ObjectMapper();
     private List<Patient> localPatients;
+    private final String apiURL = "http://desktop-15eve81:8081";
 
     @GetMapping("/patients")
     public String getPatients(Model model) throws JsonProcessingException {
-        final String uri = "http://localhost:8081/patients";
+        final String uri = apiURL + "/patients";
         RestTemplate restTemplate = new RestTemplate();
         String jsonPatients = restTemplate.getForObject(uri, String.class);
 
@@ -46,7 +47,7 @@ public class PatientController {
     @PostMapping("/patient/new")
     public String savePatient (@ModelAttribute Patient patient){
         RestTemplate restTemplate = new RestTemplate();
-        final String uri = "http://localhost:8081/patient/";
+        final String uri = apiURL + "/patient/";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -77,7 +78,7 @@ public class PatientController {
     @PostMapping("/editPatient/{id}")
     public String editPatient(@ModelAttribute Patient patient, @PathVariable String id){
         RestTemplate restTemplate = new RestTemplate();
-        final String uri = "http://localhost:8081/patient/" + id;
+        final String uri = apiURL + "/patient/" + id;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -91,7 +92,7 @@ public class PatientController {
 
     @PostMapping("/deletePatient/{id}")
     public String deletePatient(@PathVariable String id){
-        final String uri = "http://localhost:8081/patient/" + id;
+        final String uri = apiURL + "/patient/" + id;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(uri);
         return "redirect:/patients";

@@ -22,10 +22,11 @@ import java.util.List;
 public class TestController {
     private final ObjectMapper mapper = new ObjectMapper();
     private List<Test> localTests;
-
+    private final String apiURL = "http://desktop-15eve81:8081";
+    
     @GetMapping("/tests")
     public String getTests(Model model) throws JsonProcessingException {
-        final String uri = "http://localhost:8081/tests";
+        final String uri = apiURL + "/tests";
         RestTemplate restTemplate = new RestTemplate();
         String jsonTests = restTemplate.getForObject(uri, String.class);
 
@@ -50,7 +51,7 @@ public class TestController {
     @PostMapping("/test/new")
     public String saveTest (@ModelAttribute Test test){
         RestTemplate restTemplate = new RestTemplate();
-        final String uri = "http://localhost:8081/test/";
+        final String uri = apiURL + "/test/";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -81,7 +82,7 @@ public class TestController {
     @PostMapping("/editTest/{id}")
     public String editTest(@ModelAttribute Test test, @PathVariable String id){
         RestTemplate restTemplate = new RestTemplate();
-        final String uri = "http://localhost:8081/test/" + id;
+        final String uri = apiURL + "/test/" + id;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -95,7 +96,7 @@ public class TestController {
 
     @PostMapping("/deleteTest/{id}")
     public String deleteTest(@PathVariable String id){
-        final String uri = "http://localhost:8081/test/" + id;
+        final String uri = apiURL + "/test/" + id;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(uri);
         return "redirect:/tests";

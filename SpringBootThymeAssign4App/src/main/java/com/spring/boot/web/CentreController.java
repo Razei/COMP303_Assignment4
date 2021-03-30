@@ -22,10 +22,11 @@ import java.util.List;
 public class CentreController {
     private final ObjectMapper mapper = new ObjectMapper();
     private List<Centre> localCentres;
+    private final String apiURL = "http://desktop-15eve81:8081";
 
     @GetMapping("/centres")
     public String getCentres(Model model) throws JsonProcessingException {
-        final String uri = "http://localhost:8081/centres";
+        final String uri = apiURL + "/centres";
         RestTemplate restTemplate = new RestTemplate();
         String jsonCentres = restTemplate.getForObject(uri, String.class);
 
@@ -50,7 +51,7 @@ public class CentreController {
     @PostMapping("/centre/new")
     public String saveCentre (@ModelAttribute Centre centre){
         RestTemplate restTemplate = new RestTemplate();
-        final String uri = "http://localhost:8081/centre/";
+        final String uri = apiURL + "/centre/";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -81,7 +82,7 @@ public class CentreController {
     @PostMapping("/editCentre/{id}")
     public String editCentre(@ModelAttribute Centre centre, @PathVariable String id){
         RestTemplate restTemplate = new RestTemplate();
-        final String uri = "http://localhost:8081/centre/" + id;
+        final String uri = apiURL + "/centre/" + id;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -95,7 +96,7 @@ public class CentreController {
 
     @PostMapping("/deleteCentre/{id}")
     public String deleteCentre(@PathVariable String id){
-        final String uri = "http://localhost:8081/centre/" + id;
+        final String uri = apiURL + "/centre/" + id;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(uri);
         return "redirect:/centres";
