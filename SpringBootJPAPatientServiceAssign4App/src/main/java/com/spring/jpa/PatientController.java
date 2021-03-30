@@ -24,8 +24,6 @@ public class PatientController {
 	 @ResponseStatus(value = HttpStatus.OK)
 	public void addPatient(@RequestBody Patient p) throws Exception {
 		 patientService.addPatient(p);
-		
-		
 	}
 	
 	

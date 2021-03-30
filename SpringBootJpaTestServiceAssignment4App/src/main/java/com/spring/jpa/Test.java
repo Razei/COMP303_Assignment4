@@ -3,7 +3,7 @@ package com.spring.jpa;
 import javax.persistence.*;
 
 @Entity
-@Table(name="patient")
+@Table(name="test")
 public class Test {
 
 	@Id

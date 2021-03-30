@@ -23,7 +23,7 @@ public class TestController {
     private final ObjectMapper mapper = new ObjectMapper();
     private List<Test> localTests;
     private final String apiURL = "http://desktop-15eve81:8081";
-    
+
     @GetMapping("/tests")
     public String getTests(Model model) throws JsonProcessingException {
         final String uri = apiURL + "/tests";
