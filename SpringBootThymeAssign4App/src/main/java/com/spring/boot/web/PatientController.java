@@ -30,7 +30,7 @@ public class PatientController {
         localPatients = patients;
 
         TableModel<Patient>patientTableModel = new TableModel<>(
-                new String[]{"OHIP ID", "First Name", "Last Name", "Age", "DOB", "Gender", "Address", "City", "Phone"},
+                new String[]{"OHIP ID", "First Name", "Last Name", "Age", "Gender", "Address", "City", "Phone"},
                 "Patients",
                 patients
         );
@@ -51,7 +51,6 @@ public class PatientController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        patient.setId(0L);
         HttpEntity<Patient> request = new HttpEntity<>(patient, headers);
 
         restTemplate.postForObject(uri, request, Patient.class);
@@ -62,7 +61,7 @@ public class PatientController {
     public String getEditPatient(@PathVariable String id, Model model){
         if (localPatients != null) {
             Patient patient = localPatients.stream()
-                    .filter(p -> p.getId() == Long.parseLong(id))
+                    .filter(p -> p.getOhip_ID().equals(id))
                     .findAny()
                     .orElse(null);
 
@@ -82,7 +81,6 @@ public class PatientController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        patient.setId(Long.valueOf(id));
         HttpEntity<Patient> request = new HttpEntity<>(patient, headers);
 
         restTemplate.put(uri, request, Patient.class);

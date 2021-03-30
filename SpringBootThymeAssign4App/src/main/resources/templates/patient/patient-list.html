@@ -31,23 +31,22 @@
 
                     <tbody th:if="${tableModel.getData() != null and tableModel.getData().size() > 0}">
                         <tr th:each="patient : ${tableModel.getData()}">
-                            <td th:text="${patient.getOHIP_Id()}"></td>
+                            <td th:text="${patient.getOhip_ID()}"></td>
                             <td th:text="${patient.getFirstName()}"></td>
                             <td th:text="${patient.getLastName()}"></td>
                             <td th:text="${patient.getAge()}"></td>
-                            <td th:text="${patient.getDOB()}"></td>
                             <td th:text="${patient.getGender()}"></td>
                             <td th:text="${patient.getAddress()}"></td>
                             <td th:text="${patient.getCity()}"></td>
                             <td th:text="${patient.getPhone()}"></td>
                             <td style="text-align: right;">
-                                <form class="d-inline mr-2" th:action="@{'/editPatient/' + ${patient.getId()}}">
+                                <form class="d-inline mr-2" th:action="@{'/editPatient/' + ${patient.getOhip_ID()}}">
                                     <button class="btn btn-success">
                                         <i style="color: white; font-size: 1rem" class="bi bi-pencil-square"></i>
                                     </button>
                                 </form>
 
-                                <form class="d-inline" method="POST" th:action="@{'/deletePatient/' + ${patient.getId()}}">
+                                <form class="d-inline" method="POST" th:action="@{'/deletePatient/' + ${patient.getOhip_ID()}}">
                                     <button class="btn btn-danger">
                                         <i style="color: white; font-size: 1rem" class="bi bi-trash-fill"></i>
                                     </button>

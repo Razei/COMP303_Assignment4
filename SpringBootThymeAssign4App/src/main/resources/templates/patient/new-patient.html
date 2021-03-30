@@ -17,10 +17,10 @@
         <h1 class="mb-4">New Patient</h1>
         <hr/>
 
-        <form method="post" th:action="${update} ? ('/editPatient/'+ ${patient.getId()}) : '/patient/new'" class="row no-gutters">
+        <form method="post" th:action="${update} ? ('/editPatient/'+ ${patient.getOhip_ID()}) : '/patient/new'" class="row no-gutters">
             <div class="col-12 mb-5">
                 <div class="row no-gutters mb-4">
-                    <input title="OHIP_Id" type="text" name="OHIP_Id" placeholder="OHIP ID" class="form-control" th:value="${patient?.getOHIP_Id()}" required/>
+                    <input title="ohip_ID" type="text" name="ohip_ID" placeholder="OHIP ID" class="form-control" th:value="${patient?.getOhip_ID()}" required/>
                 </div>
 
                 <div class="row no-gutters mb-4">
@@ -33,10 +33,6 @@
 
                 <div class="row no-gutters mb-4">
                     <input title="Age" type="number" name="age" placeholder="Age" class="form-control" th:value="${patient?.getAge()}" required/>
-                </div>
-
-                <div class="row no-gutters mb-4">
-                    <input title="Date Of Birth" type="date" name="DOB" placeholder="Date Of Birth" class="form-control" th:value="${patient?.getDOB()}" required/>
                 </div>
 
                 <div class="row no-gutters mb-4">

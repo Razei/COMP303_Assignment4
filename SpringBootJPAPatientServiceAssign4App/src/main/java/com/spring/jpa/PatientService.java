@@ -12,14 +12,15 @@ public class PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
-    public void addPatient(Patient pat) throws Exception {
-		Patient patient = patientRepository.findById(pat.getOhip_ID()).orElse(null);
+    public Patient addPatient(Patient pat) throws Exception {
+		Patient patient = patientRepository.findPatientByOhip_ID(pat.getOhip_ID());
 
         if (patient != null) {
             throw new Exception("A Patient already exists with that OHIP ID");
         } else {
             /*patient.put(pat.getOhip_ID(), pat);*/
-            patientRepository.save(pat);
+            pat.setPatientId(0);
+            return patientRepository.save(pat);
         }
     }
 
@@ -43,12 +44,12 @@ public class PatientService {
         }
     }
 
-
     //update a patient
     public void updatePatient(Patient pat) throws Exception {
-		Patient patient = patientRepository.findById(pat.getOhip_ID()).orElse(null);
+		Patient patient = patientRepository.findPatientByOhip_ID(pat.getOhip_ID());
 
         if (patient != null) {
+            pat.setPatientId(patient.getPatientId());
 			patientRepository.save(pat);
             /*patient.put(pat.getOhip_ID(), pat);*/
         } else {
@@ -58,15 +59,13 @@ public class PatientService {
 
     //delete patient
     public void deletePatient(int ohip_Id) throws Exception {
-		Patient patient = patientRepository.findById(ohip_Id).orElse(null);
+		Patient patient = patientRepository.findPatientByOhip_ID(ohip_Id);
 
         if (patient != null) {
-			patientRepository.deleteById(ohip_Id);
+			patientRepository.deletePatientByOhip_ID(ohip_Id);
             /*patient.remove(ohip_Id);*/
         } else {
-            throw new Exception("Patient  Id not found");
+            throw new Exception("OHIP Id not found");
         }
     }
-
-
 }

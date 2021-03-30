@@ -38,7 +38,7 @@ public class Patient {
 
 	}
 	
-	public Patient(String firstName, String lastName, int age, String gender,int ohip,String address, String city, String phone) {
+	public Patient(String firstName, String lastName, int age, String gender, int ohip, String address, String city, String phone) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -47,6 +47,14 @@ public class Patient {
 		this.address = address;
 		this.city = city;
 		this.phone = phone;
+	}
+
+	public int getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
 	}
 
 	public String getFirstName() {

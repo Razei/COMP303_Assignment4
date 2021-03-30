@@ -2,45 +2,43 @@ package com.spring.boot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Patient extends GenericIDType{
-    private final String OHIP_Id;
+public class Patient{
+    private final Integer patientId;
+    private final String ohip_ID;
     private final String firstName;
     private final String lastName;
     private final String age;
-    private final String DOB;
     private final String gender;
     private final String address;
     private final String city;
     private final String phone;
 
-    public Patient(@JsonProperty("id") Long id,
-                   @JsonProperty("ohip_Id") String OHIP_Id,
+    public Patient(@JsonProperty("patientId") Integer patientId,
+                   @JsonProperty("ohip_ID") String ohip_ID,
                    @JsonProperty("firstName") String firstName,
                    @JsonProperty("lastName") String lastName,
                    @JsonProperty("age") String age,
-                   @JsonProperty("dob") String DOB,
                    @JsonProperty("gender") String gender,
                    @JsonProperty("address") String address,
                    @JsonProperty("city") String city,
                    @JsonProperty("phone") String phone) {
-        this.id = id;
-        this.OHIP_Id = OHIP_Id;
+        this.patientId = patientId;
+        this.ohip_ID = ohip_ID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.DOB = DOB;
         this.gender = gender;
         this.address = address;
         this.city = city;
         this.phone = phone;
     }
 
-    public Long getId() {
-        return id;
+    public Integer getPatientId() {
+        return patientId;
     }
 
-    public String getOHIP_Id() {
-        return OHIP_Id;
+    public String getOhip_ID() {
+        return ohip_ID;
     }
 
     public String getFirstName() {
@@ -53,10 +51,6 @@ public class Patient extends GenericIDType{
 
     public String getAge() {
         return age;
-    }
-
-    public String getDOB() {
-        return DOB;
     }
 
     public String getGender() {
