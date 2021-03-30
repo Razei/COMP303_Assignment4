@@ -1,4 +1,4 @@
-package com.spring.jpa;
+package com.spring.jpa.patient;
 
 public class Patient {
 	private String firstName;

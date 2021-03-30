@@ -1,4 +1,4 @@
-package com.spring.jpa;
+package com.spring.jpa.patient;
 
 import java.util.*;
 import org.springframework.stereotype.Service;
