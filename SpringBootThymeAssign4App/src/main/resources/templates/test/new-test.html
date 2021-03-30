@@ -17,7 +17,7 @@
             <h1 class="mb-4">New Test</h1>
             <hr/>
     
-            <form method="post" th:action="${update} ? ('/editTest/'+ ${test.getId()}) : '/test/new'" class="row no-gutters">
+            <form method="post" th:action="${update} ? ('/editTest/'+ ${test.getTestId()}) : '/test/new'" class="row no-gutters">
                 <div class="col-12 mb-5">
                     <div class="row no-gutters mb-4">
                         <input title="Test Date" type="date" name="testDate" placeholder="Test Date" class="form-control" th:value="${test?.getTestDate()}" required/>
@@ -29,6 +29,10 @@
 
                     <div class="row no-gutters mb-4">
                         <input title="Status" type="text" name="status" placeholder="Status" class="form-control" th:value="${test?.getStatus()}" required/>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input title="Patient" type="text" name="patient_id" placeholder="OHIP ID" class="form-control" th:value="${test?.getPatient_id()}" required/>
                     </div>
                 </div>
 

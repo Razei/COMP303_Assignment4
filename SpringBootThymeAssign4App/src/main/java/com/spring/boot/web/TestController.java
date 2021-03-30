@@ -22,7 +22,7 @@ import java.util.List;
 public class TestController {
     private final ObjectMapper mapper = new ObjectMapper();
     private List<Test> localTests;
-    private final String apiURL = "http://desktop-15eve81:8081";
+    private final String apiURL = "http://desktop-15eve81:8083";
 
     @GetMapping("/tests")
     public String getTests(Model model) throws JsonProcessingException {
@@ -34,7 +34,7 @@ public class TestController {
         localTests = tests;
 
         TableModel<Test> testTableModel = new TableModel<>(
-                new String[]{"Test Date", "Symptoms", "Status"},
+                new String[]{"Test Date", "Symptoms", "Status", "Patient ID"},
                 "Tests",
                 tests
         );
@@ -55,7 +55,7 @@ public class TestController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        test.setId(0L);
+        test.setId(0);
         HttpEntity<Test> request = new HttpEntity<>(test, headers);
 
         restTemplate.postForObject(uri, request, Test.class);
@@ -66,7 +66,7 @@ public class TestController {
     public String getEditTest(@PathVariable String id, Model model){
         if (localTests != null) {
             Test test = localTests.stream()
-                    .filter(p -> p.getId() == Long.parseLong(id))
+                    .filter(p -> p.getTestId() == Long.parseLong(id))
                     .findAny()
                     .orElse(null);
 
@@ -86,7 +86,7 @@ public class TestController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        test.setId(Long.valueOf(id));
+        test.setId(Integer.valueOf(id));
         HttpEntity<Test> request = new HttpEntity<>(test, headers);
 
         restTemplate.put(uri, request, Test.class);

@@ -18,7 +18,7 @@ import java.util.List;
 public class PatientController {
     private final ObjectMapper mapper = new ObjectMapper();
     private List<Patient> localPatients;
-    private final String apiURL = "http://desktop-15eve81:8081";
+    private final String apiURL = "http://desktop-15eve81:8082";
 
     @GetMapping("/patients")
     public String getPatients(Model model) throws JsonProcessingException {

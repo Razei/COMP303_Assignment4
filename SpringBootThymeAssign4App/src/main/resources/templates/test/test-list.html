@@ -34,14 +34,15 @@
                             <td th:text="${test?.getTestDate()}"></td>
                             <td th:text="${test?.getSymptoms()}"></td>
                             <td th:text="${test?.getStatus()}"></td>
+                            <td th:text="${test?.getPatient_id()}"></td>
                             <td style="text-align: right;">
-                                <form class="d-inline mr-2" th:action="@{'/editTest/' + ${test?.getId()}}">
+                                <form class="d-inline mr-2" th:action="@{'/editTest/' + ${test?.getTestId()}}">
                                     <button class="btn btn-success">
                                         <i style="color: white; font-size: 1rem" class="bi bi-pencil-square"></i>
                                     </button>
                                 </form>
 
-                                <form class="d-inline" method="POST" th:action="@{'/deleteTest/' + ${test?.getId()}}">
+                                <form class="d-inline" method="POST" th:action="@{'/deleteTest/' + ${test?.getTestId()}}">
                                     <button class="btn btn-danger">
                                         <i style="color: white; font-size: 1rem" class="bi bi-trash-fill"></i>
                                     </button>
