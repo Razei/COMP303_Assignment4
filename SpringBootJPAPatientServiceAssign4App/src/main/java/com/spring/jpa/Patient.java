@@ -1,21 +1,44 @@
-package com.spring.jpa.patient;
+package com.spring.jpa;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="patient")
 public class Patient {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="patientId")
+	private int patientId;
+
+	@Column(name="firstName")
 	private String firstName;
+
+	@Column(name="lastName")
 	private String lastName;
+
+	@Column(name="age")
 	private int age;
+
+	@Column(name="gender")
 	private String gender;
+
+	@Column(name="ohip_ID")
 	private int ohip_ID;
+
+	@Column(name="address")
 	private String address;
+
+	@Column(name="city")
 	private String city;
+
+	@Column(name="phone")
 	private String phone;
 	
 	public Patient() {
-		super();
+
 	}
 	
 	public Patient(String firstName, String lastName, int age, String gender,int ohip,String address, String city, String phone) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
