@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @RestController
 public class TestController {
 
@@ -31,7 +33,7 @@ public class TestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
-    Test addTest(@RequestBody Test t) throws Exception {
+    Test addTest(@RequestBody @Valid Test t) throws Exception {
         return testService.addTest(t);
     }
 

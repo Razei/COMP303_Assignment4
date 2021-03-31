@@ -40,8 +40,8 @@ public class TestService {
     }
 
     //test for a specific patient
-    public List<Test> getPatientTests(int OHIP_NUM) {
-        return testRepository.findTestsByPatientId(OHIP_NUM);
+    public List<Test> getPatientTests(int patId) {
+        return testRepository.findTestsByPatientId(patId);
 
         /*List<Test> unfilteredList = new ArrayList<Test>(test.values());
         List<Test> filteredList = new ArrayList<Test>();

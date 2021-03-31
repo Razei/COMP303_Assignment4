@@ -6,6 +6,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface TestRepository extends JpaRepository<Test, Integer>{
-    @Query("SELECT test FROM Test test WHERE test.patient_id = :ohip_id")
-    List<Test> findTestsByPatientId(@Param("ohip_id") Integer ohip_id);
+    @Query("SELECT test FROM Test test WHERE test.patient_id = :patient_id")
+    List<Test> findTestsByPatientId(@Param("patient_id") Integer patient_id);
 }

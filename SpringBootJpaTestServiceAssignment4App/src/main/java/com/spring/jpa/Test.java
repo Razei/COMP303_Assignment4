@@ -12,6 +12,7 @@ public class Test {
 	@Column(name="testid")
 	private int testId;
 	
+	@NotNull(message="Test Date Required")
 	@Column(name="testdate")
 	@NotBlank(message = "Test Date is mandatory")
 	private String testDate;
@@ -24,6 +25,8 @@ public class Test {
 	@Column(name="status")
 	private String status;
 	
+
+	@NotEmpty(message="Patient ID needed ")
 	@Column(name="patient_id")
 	@NotBlank(message = "Patient ID is mandatory")
 	private int patient_id;
