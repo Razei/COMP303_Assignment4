@@ -1,6 +1,10 @@
 package com.spring.jpa;
 
+import org.hibernate.validator.constraints.URL;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="centre")
@@ -11,21 +15,29 @@ public class Centre {
 	private int id;
 
 	@Column(name="centreName")
+	@NotBlank(message = "Centre Name is mandatory")
 	private String centreName;
 
 	@Column(name="address")
+	@NotBlank(message = "Address is mandatory")
 	private String address;
 
 	@Column(name="city")
+	@NotBlank(message = "City is mandatory")
 	private String city;
 
 	@Column(name="phone")
+	@NotBlank(message = "Phone is mandatory")
 	private String phone;
 
 	@Column(name="website")
+	@NotBlank(message = "Website is mandatory")
+	@URL
 	private String website;
 
 	@Column(name="email")
+	@NotBlank(message = "Email is mandatory")
+	@Email
 	private String email;
 	
 	public Centre() {

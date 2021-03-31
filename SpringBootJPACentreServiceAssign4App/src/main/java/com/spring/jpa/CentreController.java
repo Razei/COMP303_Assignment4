@@ -1,5 +1,6 @@
 package com.spring.jpa;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,11 @@ public class CentreController {
 	}
 
 	@PostMapping("/centre")
-	public Centre create(@RequestBody Centre centre) {
+	public Centre create(@RequestBody Centre centre, BindingResult result) {
+		if (result.hasErrors()) {
+			return null;
+		}
+
 		return centreService.addCentre(centre);
 	}
 

@@ -17,30 +17,31 @@
             <h1 class="mb-4">New Centre</h1>
             <hr/>
 
-            <form method="post" th:action="${update} ? ('/editCentre/'+ ${centre.getId()}) : '/centre/new'" class="row no-gutters">
+            <form method="post" th:object="${centre}" th:action="${update} ? ('/editCentre/'+ ${centre.getId()}) : '/centre/new'" class="row no-gutters">
                 <div class="col-12 mb-5">
                     <div class="row no-gutters mb-4">
-                        <input title="Centre Name" type="text" name="centreName" placeholder="Centre Name" class="form-control" th:value="${centre?.getCentreName()}" required/>
+                        <input title="Centre Name" type="text" name="centreName" placeholder="Centre Name" class="form-control" th:value="${centre?.getCentreName()}"/>
+                        <span th:if="${#fields.hasErrors('centreName')}" th:errors="*{centreName}"></span>
                     </div>
 
                     <div class="row no-gutters mb-4">
-                        <input title="Address" type="text" name="address" placeholder="Address" class="form-control" th:value="${centre?.getAddress()}" required/>
+                        <input title="Address" type="text" name="address" placeholder="Address" class="form-control" th:value="${centre?.getAddress()}" />
                     </div>
 
                     <div class="row no-gutters mb-4">
-                        <input title="City" type="text" name="city" placeholder="City" class="form-control" th:value="${centre?.getCity()}" required/>
+                        <input title="City" type="text" name="city" placeholder="City" class="form-control" th:value="${centre?.getCity()}" />
                     </div>
 
                     <div class="row no-gutters mb-4">
-                        <input title="Phone Number" type="tel" name="phone" placeholder="Phone Number" class="form-control" th:value="${centre?.getPhone()}" required/>
+                        <input title="Phone Number" type="tel" name="phone" placeholder="Phone Number" class="form-control" th:value="${centre?.getPhone()}" />
                     </div>
 
                     <div class="row no-gutters mb-4">
-                        <input title="Website" type="url" name="website" placeholder="Website" class="form-control" th:value="${centre?.getWebsite()}" required/>
+                        <input title="Website" type="url" name="website" placeholder="Website" class="form-control" th:value="${centre?.getWebsite()}" />
                     </div>
 
                     <div class="row no-gutters mb-4">
-                        <input title="Email" type="email" name="email" placeholder="Email" class="form-control" th:value="${centre?.getEmail()}" required/>
+                        <input title="Email" type="email" name="email" placeholder="Email" class="form-control" th:value="${centre?.getEmail()}" />
                     </div>
                 </div>
 
