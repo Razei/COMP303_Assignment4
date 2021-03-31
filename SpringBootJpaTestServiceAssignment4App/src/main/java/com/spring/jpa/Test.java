@@ -1,6 +1,7 @@
 package com.spring.jpa;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="test")
@@ -12,15 +13,19 @@ public class Test {
 	private int testId;
 	
 	@Column(name="testdate")
+	@NotBlank(message = "Test Date is mandatory")
 	private String testDate;
-	
+
+	@NotBlank(message = "Symptoms is mandatory")
 	@Column(name="symptoms")
 	private String symptoms;
-	
+
+	@NotBlank(message = "Status is mandatory")
 	@Column(name="status")
 	private String status;
 	
 	@Column(name="patient_id")
+	@NotBlank(message = "Patient ID is mandatory")
 	private int patient_id;
 	
 	public Test() {
