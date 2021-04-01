@@ -34,11 +34,10 @@ public class PatientService {
 
     //get a specific patient
     public Patient getPatient(int ohip_Id) throws Exception {
-		Patient patient = patientRepository.findById(ohip_Id).orElse(null);
+		Patient patient = patientRepository.findPatientByOhip_ID(ohip_Id);
 
         if (patient != null) {
-			return patientRepository.findById(ohip_Id).orElse(null);
-//            return patient.get(ohip_Id);
+			return patient;
         } else {
             throw new Exception("Patient Id not found");
         }
@@ -46,12 +45,16 @@ public class PatientService {
 
     //update a patient
     public void updatePatient(Patient pat) throws Exception {
-		Patient patient = patientRepository.findPatientByOhip_ID(pat.getOhip_ID());
+		Patient patient = patientRepository.findById(pat.getPatientId()).orElse(null);
+        Patient comparePatient = patientRepository.findPatientByOhip_ID(pat.getOhip_ID());
 
         if (patient != null) {
+            boolean ohipIDexists = comparePatient != null && comparePatient.getPatientId() != patient.getPatientId();
+            if (ohipIDexists){
+                throw new Exception("A Patient already exists with that OHIP ID");
+            }
             pat.setPatientId(patient.getPatientId());
 			patientRepository.save(pat);
-            /*patient.put(pat.getOhip_ID(), pat);*/
         } else {
             throw new Exception("Patient Id not found");
         }
