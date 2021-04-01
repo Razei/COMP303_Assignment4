@@ -26,7 +26,6 @@ public class PatientService {
 
 
     //return the patient hashmap
-
     public List<Patient> getPatients() {
         return patientRepository.findAll();
         /*return patient.values();*/
@@ -53,7 +52,6 @@ public class PatientService {
             if (ohipIDexists){
                 throw new Exception("A Patient already exists with that OHIP ID");
             }
-            pat.setPatientId(patient.getPatientId());
 			patientRepository.save(pat);
         } else {
             throw new Exception("Patient Id not found");
