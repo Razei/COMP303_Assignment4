@@ -51,7 +51,6 @@ public class CentreController {
 	@GetMapping("/editCentre/{id}")
 	public String getEditCentre(@PathVariable String id, Model model){
 		Centre centre = centreService.getCentre(Integer.parseInt(id));
-
 		if (centre != null) {
 			model.addAttribute("centre", centre);
 			model.addAttribute("update", true);
@@ -63,7 +62,11 @@ public class CentreController {
 
 
 	@PostMapping("/editCentre/{id}")
-	public String editCentre(@ModelAttribute Centre centre, @PathVariable String id){
+	public String editCentre(@Valid Centre centre, BindingResult result,  @PathVariable String id){
+		if (result.hasErrors()) {
+			return "new-centre";
+		}
+
 		centre.setId(Integer.parseInt(id));
 		centreService.updateCentre(centre);
 

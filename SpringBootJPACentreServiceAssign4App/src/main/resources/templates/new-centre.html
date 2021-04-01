@@ -40,12 +40,12 @@
                     </div>
 
                     <div class="row no-gutters mb-4">
-                        <input th:field="*{website}" title="Website" type="url" name="website" placeholder="Website" class="form-control" th:value="${centre?.getWebsite()}" />
+                        <input th:field="*{website}" title="Website" type="text" name="website" placeholder="Website" class="form-control" th:value="${centre?.getWebsite()}" />
                         <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('website')}" th:errors="*{website}"></div>
                     </div>
 
                     <div class="row no-gutters mb-4">
-                        <input th:field="*{email}" title="Email" type="email" name="email" placeholder="Email" class="form-control" th:value="${centre?.getEmail()}" />
+                        <input th:field="*{email}" title="Email" type="text" name="email" placeholder="Email" class="form-control" th:value="${centre?.getEmail()}" />
                         <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                     </div>
                 </div>
