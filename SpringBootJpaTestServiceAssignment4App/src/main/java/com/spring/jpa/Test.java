@@ -1,7 +1,8 @@
 package com.spring.jpa;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
+
 
 @Entity
 @Table(name="test")
