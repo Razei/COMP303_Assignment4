@@ -1,0 +1,11 @@
+:root {
+    --colour-1: #06AED5;
+    --colour-2: #086788;
+    --colour-3: #F0C808;
+    --colour-4: #FFF1D0;
+    --colour-5: #DD1C1A;
+
+    --gradient-1: linear-gradient(90deg, rgba(0, 212, 255, 255) 0%, rgba(9, 9, 121, 255) 100%);
+    --gradient-2: linear-gradient(90deg, rgba(255, 239, 0, 255) 0%, rgba(255, 42, 0, 255) 100%);
+    --gradient-3: linear-gradient(90deg, rgba(255, 0, 232, 255) 0%, rgba(94, 0, 255, 255) 100%);
+}

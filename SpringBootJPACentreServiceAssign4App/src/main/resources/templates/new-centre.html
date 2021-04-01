@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>New Centre</title>
+        <th:block th:replace="partial/imports.html :: headerFragment"/>
+    </head>
+
+    <body>
+        <div class="container p-5">
+            <form method="GET" action="/" class="mb-2">
+                <button class="btn btn-primary">
+                    <i style="color: white; font-size: 1.5rem; vertical-align: center" class="mr-2 bi bi-arrow-left-square-fill"></i>Back
+                </button>
+            </form>
+
+            <h1 class="mb-4">New Centre</h1>
+            <hr/>
+
+            <form method="post" th:object="${centre}" th:action="${update} ? ('/editCentre/'+ ${centre.getId()}) : '/centre/new'" class="row no-gutters">
+                <div class="col-12 mb-5">
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{centreName}" title="Centre Name" type="text" name="centreName" placeholder="Centre Name" class="form-control" th:value="${centre?.getCentreName()}"/>
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('centreName')}" th:errors="*{centreName}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{address}" title="Address" type="text" name="address" placeholder="Address" class="form-control" th:value="${centre?.getAddress()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{city}" title="City" type="text" name="city" placeholder="City" class="form-control" th:value="${centre?.getCity()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{phone}" title="Phone Number" type="tel" name="phone" placeholder="Phone Number" class="form-control" th:value="${centre?.getPhone()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{website}" title="Website" type="url" name="website" placeholder="Website" class="form-control" th:value="${centre?.getWebsite()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('website')}" th:errors="*{website}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{email}" title="Email" type="email" name="email" placeholder="Email" class="form-control" th:value="${centre?.getEmail()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                    </div>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
