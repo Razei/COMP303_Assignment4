@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+}
+
+body {
+    height: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+i {
+    color: white;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    line-height: 0;
+}
+
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+label{
+    margin:0;
+}
+
+.gradient-1 {
+    background: var(--gradient-1);
+}
+
+.gradient-2 {
+    background: var(--gradient-2);
+}
+
+.gradient-3 {
+    background: var(--gradient-3);
+}
+
+.btn-primary{
+    background-color:var(--colour-1);
+    border-color: var(--colour-1);
+}
+
+.shadowed {
+    /*background-color: #efefef;*/
+    background-color: #ffffff;
+    box-shadow: 0 0 32px 0 rgba(0,0,0,0.15);
+}
+
+.rounded-custom{
+    border-radius: .5rem;
+}
+
+.flexible-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.absolute-centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.absolute-centered:after {
+    position: absolute;
+    content: "";
+    bottom: -40px;
+    top: -40px;
+    height: 40px;
+    width: 1px;
+}
+
+.custom-card{
+    transition: transform .2s;
+    font-size: 1.2rem;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0);
+}
+
+.custom-card span{
+    text-decoration: none;
+    color: black;
+}
+
+.custom-card:hover{
+    /*color: white;*/
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+.custom-card:hover i {
+    color: black !important;
+}
+
+.custom-card:hover span{
+    /*color: white;*/
+}
+
+.custom-card-standard :hover{
+    background: var(--colour-1);
+}
+
+.custom-card-gradient-1:hover{
+    background: var(--gradient-1);
+}
+
+.custom-card-gradient-2:hover{
+    background: var(--gradient-2);
+}
+
+.custom-card-gradient-3:hover{
+    background: var(--gradient-3);
+}

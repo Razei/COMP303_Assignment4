@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>New Patient</title>
+        <th:block th:replace="partial/imports.html :: headerFragment"/>
+    </head>
+
+    <body>
+        <div class="container p-5">
+            <form method="GET" action="/" class="mb-2">
+                <button class="btn btn-primary">
+                    <i style="color: white; font-size: 1.5rem; vertical-align: center" class="mr-2 bi bi-arrow-left-square-fill"></i>Back
+                </button>
+            </form>
+
+            <h1 class="mb-4">New Patient</h1>
+            <hr/>
+
+            <form method="post" th:object="${patient}" th:action="${update} ? ('/editPatient/'+ ${patient.getOhip_ID()}) : '/patient/new'" class="row no-gutters">
+                <div class="col-12 mb-5">
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{patientId}" th:value="${patient?.getPatientId()}" hidden readonly/>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{ohip_ID}" title="ohip_ID" type="text" name="ohip_ID" placeholder="OHIP ID" class="form-control" th:value="${patient?.getOhip_ID()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('ohip_ID')}" th:errors="*{ohip_ID}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{firstName}" title="First Name" type="text" name="firstName" placeholder="First Name" class="form-control" th:value="${patient?.getFirstName()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{lastName}" title="Last Name" type="text" name="lastName" placeholder="Last Name" class="form-control" th:value="${patient?.getLastName()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{age}" title="Age" type="text" name="age" placeholder="Age" class="form-control" th:value="${patient?.getAge()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{address}" title="Address" type="text" name="address" placeholder="Address" class="form-control" th:value="${patient?.getAddress()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{city}" title="City" type="text" name="city" placeholder="City" class="form-control" th:value="${patient?.getCity()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+                    </div>
+
+                    <div class="row no-gutters mb-4">
+                        <input th:field="*{phone}" title="Phone Number" type="text" name="phone" placeholder="Phone Number" class="form-control" th:value="${patient?.getPhone()}" />
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+                    </div>
+
+                    <div class="col-12 p-0 mb-2">
+                        <div class="row no-gutters">
+                            <div class="col-auto d-flex align-items-center">
+                                <input th:field="*{gender}" type="radio" name="gender" id="gender-m" value="Male"/>
+                                <label class="ml-2" for="gender-m">Male</label>
+                            </div>
+
+                            <div class="col-auto ml-3 d-flex align-items-center">
+                                <input th:field="*{gender}" type="radio" name="gender" id="gender-f" value="Female"/>
+                                <label class="ml-2" for="gender-f">Female</label>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-danger mt-2 w-100" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+                    </div>
+                </div>
+
+                <div class="row no-gutters mb-4">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

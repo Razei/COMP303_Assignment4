@@ -14,28 +14,22 @@ public class Centre {
 	@Column(name="id")
 	private int id;
 
-	@Column(name="centreName") @Size(min=5)
 	@NotBlank(message = "Centre Name is mandatory")
 	private String centreName;
 
-	@Column(name="address")
 	@NotBlank(message = "Address is mandatory")
 	private String address;
 
-	@Column(name="city")
 	@NotBlank(message = "City is mandatory")
 	private String city;
 
-	@Column(name="phone")
 	@NotBlank(message = "Phone is mandatory")
 	private String phone;
 
-	@Column(name="website")
 	@NotBlank(message = "Website is mandatory")
 	@URL
 	private String website;
 
-	@Column(name="email")
 	@NotBlank(message = "Email is mandatory")
 	@Email
 	private String email;

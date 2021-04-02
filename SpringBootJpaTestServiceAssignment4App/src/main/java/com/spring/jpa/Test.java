@@ -10,35 +10,29 @@ public class Test {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="testid")
 	private int testId;
 	
 	@NotNull(message="Test Date Required")
-	@Column(name="testdate")
 	@NotBlank(message = "Test Date is mandatory")
 	private String testDate;
 
 	@NotBlank(message = "Symptoms is mandatory")
-	@Column(name="symptoms")
 	private String symptoms;
 
 	@NotBlank(message = "Status is mandatory")
-	@Column(name="status")
 	private String status;
 	
 
-	@NotEmpty(message="Patient ID needed ")
-	@Column(name="patient_id")
-	@NotBlank(message = "Patient ID is mandatory")
+	@NotNull(message="Patient ID needed ")
 	private int patient_id;
 	
 	public Test() {
 		
 	}
 	
-	public Test(String testDate, String symtpoms, String status, int patient_id) {
+	public Test(String testDate, String symptoms, String status, int patient_id) {
 		this.testDate = testDate;
-		this.symptoms = symtpoms;
+		this.symptoms = symptoms;
 		this.status = status;
 		this.patient_id = patient_id;
 	}

@@ -1,45 +1,102 @@
 package com.spring.jpa;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.spring.jpa.model.TableModel;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
-@RestController
+@Controller
 public class PatientController {
     private final PatientService patientService;
-
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
 
-    //add a patient object to the repo
-    @RequestMapping(value = "/patient", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public Patient addPatient(@RequestBody Patient p) throws Exception {
-        return patientService.addPatient(p);
+    @GetMapping("/")
+    public String getPatients(Model model) {
+        TableModel<Patient> patientTableModel = new TableModel<>(
+                new String[]{"OHIP ID", "First Name", "Last Name", "Age", "Gender", "Address", "City", "Phone"},
+                "Patients",
+                patientService.getPatients()
+        );
+
+        model.addAttribute("tableModel", patientTableModel);
+        return "patient-list";
     }
 
-    @RequestMapping(value = "/patient/{OHIP_ID}", method = RequestMethod.GET)
-    Patient getPatient(@PathVariable("OHIP_ID") int OHIP_ID) throws Exception {
-        return patientService.getPatient(OHIP_ID);
+    @GetMapping("/patient/new")
+    public String newPatient(Model model){
+        model.addAttribute("patient", new Patient());
+        return "new-patient";
     }
 
-    @RequestMapping(value = "/patients", method = RequestMethod.GET)
-    public List<Patient> getPatients() {
-        return patientService.getPatients();
+    @PostMapping("/patient/new")
+    public String savePatient (@Valid Patient patient, BindingResult result, Model model) throws Exception {
+        if (result.hasErrors()) {
+            model.addAttribute("patient", patient);
+            return "new-patient";
+        }
+
+        try {
+            patientService.addPatient(patient);
+            return "redirect:/";
+        } catch (Exception ex){
+            result.rejectValue("ohip_ID", "error.ohip_ID", ex.getMessage());
+            model.addAttribute("patient", patient);
+            return "new-patient";
+        }
     }
 
-    @RequestMapping(value = "/patient/{OHIP_ID}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
-    void updatePatient(@PathVariable("OHIP_ID") int OHIP_ID, @RequestBody Patient patient) throws Exception {
-        patientService.updatePatient(patient);
+    @GetMapping("/editPatient/{id}")
+    public String getEditPatient(@PathVariable String id, Model model) throws Exception {
+        Patient patient = patientService.getPatient(Integer.parseInt(id));
+
+        if (patient != null) {
+            model.addAttribute("patient", patient);
+            model.addAttribute("update", true);
+            return "new-patient";
+        }
+
+        return "redirect:/";
     }
 
-    @RequestMapping(value = "/patient/{OHIP_ID}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    void deletePatient(@PathVariable("OHIP_ID") int OHIP_ID) throws Exception {
-        patientService.deletePatient(OHIP_ID);
+    @PostMapping("/editPatient/{id}")
+    public String editPatient(@PathVariable int id, @Valid Patient patient, BindingResult result, Model model){
+
+        if (result.hasErrors()) {
+            model.addAttribute("update", true);
+            patient.setOhip_ID(id);
+            model.addAttribute("patient", patient);
+            return "new-patient";
+        }
+
+        try {
+            patientService.updatePatient(patient);
+            return "redirect:/";
+        } catch (Exception ex){
+            result.rejectValue("ohip_ID", "error.ohip_ID", ex.getMessage());
+            model.addAttribute("update", true);
+            patient.setOhip_ID(id);
+            model.addAttribute("patient", patient);
+            return "new-patient";
+        }
+    }
+
+    @PostMapping("/deletePatient/{id}")
+    public String deletePatient(@PathVariable String id) throws Exception {
+        patientService.deletePatient(Integer.parseInt(id));
+        return "redirect:/";
     }
 }

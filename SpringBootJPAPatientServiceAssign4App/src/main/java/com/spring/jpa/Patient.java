@@ -7,39 +7,30 @@ import javax.validation.constraints.*;
 public class Patient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="patientId")
 	private int patientId;
 
 	@NotEmpty(message="First Name Required") @Size(min=2, max=60)
-	@Column(name="firstName")
 	private String firstName;
 	
 	@NotEmpty(message="Last Name Required") @Size(min=2, max=60)
-	@Column(name="lastName")
 	private String lastName;
 	
 	@NotNull(message="Age Required") @Min(0)
-	@Column(name="age")
 	private int age;
 	
 	@NotEmpty(message="Gender Required")
-	@Column(name="gender")
 	private String gender;
-	
+
 	@NotNull(message="ohip # Required")
-	@Column(name="ohip_id")
 	private int ohip_ID;
 
 	@NotEmpty(message="Address Required")
-	@Column(name="address")
 	private String address;
 	
 	@NotEmpty(message="City Required")
-	@Column(name="city")
 	private String city;
 	
 	@Pattern(regexp="^\\(?(\\d{3})\\)?[-]?(\\d{3}[-]?(\\d{4}))$", message="Phone Number is invalid")
-	@Column(name="phone")
 	private String phone;
 	
 	public Patient() {

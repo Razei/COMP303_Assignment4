@@ -1,41 +1,81 @@
 package com.spring.jpa;
+import com.spring.jpa.model.TableModel;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.util.List;
 
-@RestController
+@Controller
 public class CentreController {
 	private final CentreService centreService;
 	public CentreController(CentreService centreService) {
 		this.centreService = centreService;
 	}
 
-	@RequestMapping(value ="/centres", method = RequestMethod.GET)
-	public List<Centre> getCentres(){
-		return centreService.getCentres();
+	@GetMapping("/")
+	public String home (Model model){
+		TableModel<Centre> centreTableModel = new TableModel<>(
+				new String[]{"Centre Name", "Address", "City", "Phone", "Website", "Email"},
+				"Centres",
+				centreService.getCentres()
+		);
+
+		model.addAttribute("tableModel", centreTableModel);
+		return "centre-list";
 	}
 
-	@PostMapping("/centre")
-	public Centre create(@RequestBody Centre centre, BindingResult result) {
+	@GetMapping("/centre/new")
+	public String newCentre(Model model){
+		model.addAttribute("centre", new Centre());
+		return "new-centre";
+	}
+
+	@PostMapping("/centre/new")
+	public String saveCentre (@Valid Centre centre, BindingResult result) {
 		if (result.hasErrors()) {
-			return null;
+			return "new-centre";
 		}
 
-		return centreService.addCentre(centre);
+		centreService.addCentre(centre);
+		return "redirect:/";
 	}
 
-	@PutMapping("/centre/{id}")
-	@ResponseStatus(value = HttpStatus.OK)
-	String editCentre(@PathVariable String id, @RequestBody Centre centre){
+	@GetMapping("/editCentre/{id}")
+	public String getEditCentre(@PathVariable String id, Model model){
+		Centre centre = centreService.getCentre(Integer.parseInt(id));
+		if (centre != null) {
+			model.addAttribute("centre", centre);
+			model.addAttribute("update", true);
+			return "new-centre";
+		}
+
+		return "redirect:/";
+	}
+
+
+	@PostMapping("/editCentre/{id}")
+	public String editCentre(@Valid Centre centre, BindingResult result,  @PathVariable String id){
+		if (result.hasErrors()) {
+			return "new-centre";
+		}
+
 		centre.setId(Integer.parseInt(id));
-		return centreService.updateCentre(centre);
+		centreService.updateCentre(centre);
+
+		return "redirect:/";
 	}
 
-	@DeleteMapping("/centre/{id}")
-	@ResponseStatus(value = HttpStatus.OK)
-	String deletePatient(@PathVariable String id){
-		return centreService.deleteCentre(Integer.parseInt(id));
+	@PostMapping("/deleteCentre/{id}")
+	public String deleteCentre(@PathVariable String id){
+		centreService.deleteCentre(Integer.parseInt(id));
+		return "redirect:/";
 	}
 }
