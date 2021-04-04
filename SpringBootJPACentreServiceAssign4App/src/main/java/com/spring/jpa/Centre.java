@@ -23,7 +23,7 @@ public class Centre {
 	@NotBlank(message = "City is mandatory")
 	private String city;
 
-	@NotBlank(message = "Phone is mandatory")
+	@Pattern(regexp="^\\(?(\\d{3})\\)?[-]?(\\d{3}[-]?(\\d{4}))$", message="Phone Number is invalid")
 	private String phone;
 
 	@NotBlank(message = "Website is mandatory")
